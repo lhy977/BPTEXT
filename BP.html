@@ -1,0 +1,698 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %used for font color
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %useful to type directly diacritic characters
+\begin{document}
+\begin{align*}<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEU·Star Rail 第一届哈基杯「缤纷大乱斗」BP规则</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0ff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(10, 15, 35, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 100,100" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(106, 17, 203, 0.7);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #6a9eff;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4a6fcb;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #82aaff;
+            margin: 20px 0 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        section {
+            margin-bottom: 35px;
+            padding: 20px;
+            background: rgba(20, 25, 50, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid #6a11cb;
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .rule-card {
+            background: rgba(30, 35, 70, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #4a4a8a;
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #6a9eff;
+        }
+        
+        .rule-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .rule-card h3::before {
+            content: "•";
+            color: #6a9eff;
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        li::marker {
+            color: #6a9eff;
+        }
+        
+        .bp-process {
+            margin-top: 30px;
+        }
+        
+        .phase {
+            background: rgba(25, 30, 60, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #4a4a8a;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #4a6fcb;
+        }
+        
+        .phase-number {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step {
+            background: rgba(40, 45, 80, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-icon {
+            background: #4a6fcb;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .team-blue {
+            color: #6a9eff;
+            font-weight: bold;
+        }
+        
+        .team-red {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .ban {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .pick {
+            color: #4cd97b;
+            font-weight: bold;
+        }
+        
+        .shared {
+            color: #ffd166;
+            font-weight: bold;
+        }
+        
+        .exclusive {
+            color: #4cd97b;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background: rgba(106, 17, 203, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .term {
+            color: #ffd166;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #4a4a8a;
+            font-size: 0.9rem;
+            color: #8a9dff;
+        }
+        
+        /* 模拟示例样式 */
+        .simulation {
+            background: rgba(25, 30, 60, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .simulation-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .simulation-icon {
+            background: linear-gradient(135deg, #ffd166 0%, #ff9e6d 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .role-pool {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(40, 45, 80, 0.6);
+            border-radius: 8px;
+        }
+        
+        .role-pool h4 {
+            margin-bottom: 10px;
+            color: #82aaff;
+        }
+        
+        .roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .role {
+            background: rgba(106, 17, 203, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .team-roster {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 0;
+        }
+        
+        .roster {
+            width: 48%;
+            background: rgba(40, 45, 80, 0.6);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .roster h4 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #82aaff;
+        }
+        
+        .roster-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .roster-role {
+            background: rgba(106, 17, 203, 0.4);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .action {
+            background: rgba(74, 111, 203, 0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #4a6fcb;
+        }
+        
+        .action-desc {
+            margin-left: 10px;
+        }
+        
+        .phase-title {
+            margin: 15px 0 10px;
+            color: #ffd166;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-roster {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .roster {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SEU·Star Rail(𝓒𝔂𝓻𝓮𝓷𝓮 𝓵𝓸𝓿𝓮)第一届哈基杯</h1>
+            <div class="subtitle">「缤纷大乱斗」趣味竞技赛 - 禁用与选用（BP）规则</div>
+        </header>
+        
+        <section>
+            <h2>一、总则</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>比赛目标</h3>
+                    <p>红、蓝双方需通过以下BP流程，各自组建一个由 <span class="highlight">3名主攻角色</span> 和 <span class="highlight">3名辅助角色</span> 构成的6人阵容进行对决。</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h3>角色池</h3>
+                    <p>本次比赛共有12名独特角色。初始状态下，设立独立的 <span class="highlight">主攻角色池（12人）</span> 和 <span class="highlight">辅助角色池（12人）</span>。同一角色在两个池中独立存在。</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h3>核心定义</h3>
+                    <ul>
+                        <li><span class="term">禁用（Ban）</span>：指定一名角色在当前定位上的使用权。被禁用后，该角色仅从<span class="highlight">对应的定位池</span>中移除。</li>
+                        <li><span class="term">选用（Pick）</span>：指定一名角色，将其纳入特定阵容。分为两类：
+                            <ul>
+                                <li><span class="term">独占选用</span>：该角色仅能被选用方使用。选用后，角色仅从<span class="highlight">对应的定位池</span>中移除。</li>
+                                <li><span class="term">共用选用</span>：该角色将同时分配给红、蓝双方使用。选用后，因角色已被双方锁定，故将<span class="highlight">同时从主攻池和辅助池中彻底移除</span>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="rule-card">
+                    <h3>池子管理原则</h3>
+                    <p>除"共用选用"操作外，所有"禁用"和"独占选用"操作仅影响角色在<span class="highlight">该次操作所指定定位</span>的池子。角色仍可以其另一定位留在池中，直至被再次操作。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="bp-process">
+            <h2>二、BP流程细则</h2>
+            
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <h3>第一阶段：首轮禁用与选用</h3>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        <span class="ban">禁用环节</span>：
+                        <ul>
+                            <li><span class="team-blue">蓝方</span>优先，<span class="ban">禁用</span>1名主攻角色（从主攻池移除）。</li>
+                            <li><span class="team-red">红方</span>随后，<span class="ban">禁用</span>1名辅助角色（从辅助池移除）。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <div>
+                        <span class="pick">选用环节</span>：
+                        <ul>
+                            <li><span class="team-blue">蓝方</span>进行1次<span class="shared">共用选用</span>，选择1名<span class="shared">共用主攻角色</span>。</li>
+                            <li><span class="term">效果</span>：此角色加入双方阵容的主攻位，并<span class="highlight">同时从主攻池和辅助池中彻底移除</span>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <h3>第二阶段：次轮禁用与选用</h3>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        <span class="ban">禁用环节</span>：
+                        <ul>
+                            <li><span class="team-blue">蓝方</span>优先，<span class="ban">禁用</span>1名辅助角色（从辅助池移除）。</li>
+                            <li><span class="team-red">红方</span>随后，<span class="ban">禁用</span>1名主攻角色（从主攻池移除）。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <div>
+                        <span class="pick">选用环节</span>：
+                        <ul>
+                            <li><span class="team-red">红方</span>进行1次<span class="shared">共用选用</span>，选择1名<span class="shared">共用辅助角色</span>。</li>
+                            <li><span class="term">效果</span>：此角色加入双方阵容的辅助位，并<span class="highlight">同时从主攻池和辅助池中彻底移除</span>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <h3>第三阶段：独占角色选用</h3>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        <span class="pick">选用顺序与数量</span>：
+                        <ol>
+                            <li><span class="team-blue">蓝方</span>从剩余主攻池中，进行1次<span class="exclusive">独占选用</span>，选择1名主攻角色（从主攻池移除）。</li>
+                            <li><span class="team-red">红方</span>从剩余主攻池中，进行2次<span class="exclusive">独占选用</span>，选择2名主攻角色（从主攻池移除）。</li>
+                            <li><span class="team-blue">蓝方</span>从剩余辅助池中，进行2次<span class="exclusive">独占选用</span>，选择2名辅助角色（从辅助池移除）。</li>
+                            <li><span class="team-red">红方</span>从剩余辅助池中，进行1次<span class="exclusive">独占选用</span>，选择1名辅助角色（从辅助池移除）。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">4</div>
+                    <h3>第四阶段：混合池选用</h3>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        <span class="term">混合池构成</span>：完成前三阶段后，将此时<span class="highlight">主攻池中所有剩余角色</span>与<span class="highlight">辅助池中所有剩余角色</span>合并，并去除已BAN的角色，形成<span class="highlight">混合角色池</span>。此池中的角色同时拥有主攻和辅助两种定位。<span class="term">注</span>：无论是作为什么定位被BAN都从混合池中移除。选用时只需考虑自己未拥有即可，无需考虑对手是否拥有。
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <div>
+                        <span class="pick">选用顺序</span>：
+                        <ul>
+                            <li><span class="team-blue">蓝方</span>从混合池中，进行1次<span class="exclusive">独占选用</span>，选择1名主攻角色（从混合池移除）。</li>
+                            <li><span class="team-red">红方</span>从混合池中，进行1次<span class="exclusive">独占选用</span>，选择1名辅助角色（从混合池移除）。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <div>
+                        <span class="term">效果</span>：被选用的角色从混合池中移除，并计入己方阵容。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase">
+                <div class="phase-header">
+                    <div class="phase-number">5</div>
+                    <h3>第五阶段：最终配队</h3>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        所有BP环节结束后，红、蓝双方在己方已确定的3名主攻角色和3名辅助角色内，进行自由配对，形成3个作战单位。
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>三、通用条款</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>操作不可逆</h3>
+                    <p>所有操作一经确认，立即生效，不得更改。</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h3>角色唯一性</h3>
+                    <p>任何角色在同一方阵容中只能以一种定位出场。一方通过"独占选用"获得的角色，另一方无法使用。</p>
+                </div>
+                
+                <div class="rule-card">
+                    <h3>解释权</h3>
+                    <p>本规则的最终解释权归赛事组委会所有。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 模拟示例部分 -->
+        <section class="simulation">
+            <div class="simulation-header">
+                <div class="simulation-icon">🎮</div>
+                <h2>BP规则模拟示例</h2>
+            </div>
+            
+            <p>以下是一个完整的BP过程模拟，展示了规则的实际应用。角色使用数字1-12表示。</p>
+            
+            <div class="role-pool">
+                <h4>初始角色池</h4>
+                <div class="roles">
+                    <div class="role">主攻池: 1,2,3,4,5,6,7,8,9,10,11,12</div>
+                    <div class="role">辅助池: 1,2,3,4,5,6,7,8,9,10,11,12</div>
+                </div>
+            </div>
+            
+            <h3 class="phase-title">第一阶段：首轮禁用与选用</h3>
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="ban">禁用</span> 主攻角色 <span class="highlight">1</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="ban">禁用</span> 辅助角色 <span class="highlight">2</span>
+            </div>
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="shared">共用选用</span> 主攻角色 <span class="highlight">3</span>
+                <div class="action-desc">（角色3加入双方主攻位，并从所有池中移除）</div>
+            </div>
+            
+            <div class="role-pool">
+                <h4>第一阶段后角色池</h4>
+                <div class="roles">
+                    <div class="role">主攻池: 2,4,5,6,7,8,9,10,11,12</div>
+                    <div class="role">辅助池: 1,4,5,6,7,8,9,10,11,12</div>
+                </div>
+            </div>
+            
+            <h3 class="phase-title">第二阶段：次轮禁用与选用</h3>
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="ban">禁用</span> 辅助角色 <span class="highlight">4</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="ban">禁用</span> 主攻角色 <span class="highlight">5</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="shared">共用选用</span> 辅助角色 <span class="highlight">6</span>
+                <div class="action-desc">（角色6加入双方辅助位，并从所有池中移除）</div>
+            </div>
+            
+            <div class="role-pool">
+                <h4">第二阶段后角色池</h4>
+                <div class="roles">
+                    <div class="role">主攻池: 2,4,7,8,9,10,11,12</div>
+                    <div class="role">辅助池: 1,5,7,8,9,10,11,12</div>
+                </div>
+            </div>
+            
+            <h3 class="phase-title">第三阶段：独占角色选用</h3>
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="exclusive">独占选用</span> 主攻角色 <span class="highlight">7</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="exclusive">独占选用</span> 主攻角色 <span class="highlight">8,9</span>
+            </div>
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="exclusive">独占选用</span> 辅助角色 <span class="highlight">10,11</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="exclusive">独占选用</span> 辅助角色 <span class="highlight">12</span>
+            </div>
+            
+            <div class="role-pool">
+                <h4>第三阶段后角色池</h4>
+                <div class="roles">
+                    <div class="role">主攻池: 2,4,10,11,12</div>
+                    <div class="role">辅助池: 1,5,7,8,9</div>
+                </div>
+            </div>
+            
+            <h3 class="phase-title">第四阶段：混合池选用</h3>
+            <div class="action">
+                <span class="term">混合池构成</span>: 主攻池剩余(2,4,10,11,12) + 辅助池剩余(1,5,7,8,9) - 已BAN角色(1,2,4,5) = <span class="highlight">7,8,9,10,11,12</span>
+                <div class="action-desc">（所有角色已被选用或禁用）</div>
+            </div>
+            
+            <div class="action">
+                <span class="team-blue">蓝方</span> <span class="exclusive">混合选用</span> 主攻角色 <span class="highlight">12</span>
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> <span class="exclusive">混合选用</span> 辅助角色 <span class="highlight">7</span>
+            </div>
+            <div class="action">
+            <div class="team-roster">
+                <div class="roster">
+                    <h4>蓝方最终阵容</h4>
+                    <div class="roster-list">
+                        <div class="roster-role">主攻: 3(共用),7(独占),12(混合)</div>
+                        <div class="roster-role">辅助: 6(共用),10(独占),11(独占)</div>
+                    </div>
+                </div>
+                
+                <div class="roster">
+                    <h4>红方最终阵容</h4>
+                    <div class="roster-list">
+                        <div class="roster-role">主攻: 3(共用),8(独占),9(独占)</div>
+                        <div class="roster-role">辅助: 6(共用),12(独占),7(混合)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="phase-title">第五阶段：最终配队</h3>
+            <div class="action">
+                <span class="team-blue">蓝方</span> 自由配队：例如 (3+10), (7+11), (6+12)
+            </div>
+            <div class="action">
+                <span class="team-red">红方</span> 自由配队：例如 (3+6), (8+12), (9+7)
+            </div>
+            
+
+        </section>
+        
+        <footer>
+            <p>SEU·Star Rail(𝓒𝔂𝓻𝓮𝓷𝓮 𝓵𝓸𝓿𝓮)第一届哈基杯赛事组委会</p>
+        </footer>
+    </div>
+</body>
+</html>\end{align*}
+\end{document}
